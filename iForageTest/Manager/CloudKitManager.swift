@@ -6,7 +6,6 @@
 //
 import CloudKit
 import Foundation
-import UIKit
 import SwiftUI
 
 let container = CKContainer.init(identifier: "iCloud.iForage")
@@ -17,6 +16,10 @@ class CloudKitUtility {
         let (matchedRecords, _) = try await container.publicCloudDatabase.records(matching: query)
         let records = matchedRecords.compactMap { _, value in try? value.get() }
         return records
+    }
+    
+    static func modifyRecords(records: [CKRecord]) async throws {
+        let (_, _) = try await container.publicCloudDatabase.modifyRecords(saving: records, deleting: [])
     }
     
     static func deleteRecord(recordID: CKRecord.ID) async throws {
@@ -81,5 +84,9 @@ class CloudKitManager: ObservableObject {
         let query = CKQuery(recordType: RecordType.post, predicate: predicate)
         let records = try await CloudKitUtility.fetchRecords(query: query)
         return records.map(Post.init)
+    }
+    
+    @MainActor func favouritePost() async throws {
+        
     }
 }

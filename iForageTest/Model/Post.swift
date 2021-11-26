@@ -25,9 +25,10 @@ struct Post: Identifiable {
     let id: CKRecord.ID
     
     let title: String
-    let caption: String
+    var caption: String
     let coordinate: CLLocation
     let image: CKAsset!
+    var isLiked: Bool?
 }
 
 extension Post {
@@ -36,4 +37,6 @@ extension Post {
     static let kCoordinate = "coordinate"
     static let kImage = "image"
     static let kUserID = "userID"
+    
+    static let kIsLiked = "isLiked"
 }

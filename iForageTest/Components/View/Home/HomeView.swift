@@ -46,17 +46,9 @@ struct HomeView: View {
                 MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: post.coordinate.coordinate.latitude, longitude: post.coordinate.coordinate.longitude)) {
                     
                     NavigationLink {
-                        PostDetailView(viewModel: PostDetailView.ViewModel(post: post))
+                        LazyView(PostDetailView(viewModel: PostDetailView.ViewModel(post: post, posts: $viewModel.posts)))
                     } label: {
-                        Image(uiImage: post.image.toUIImage())
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 50, height: 50, alignment: .center)
-                            .clipShape(Circle())
-                            .padding(3)
-                            .background(Color.white)
-                            .clipShape(Circle())
-                            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 0)
+                        MapAnnotationCell(image: post.image.toUIImage())
                     }
                     .isDetailLink(false)
                 }
@@ -85,11 +77,31 @@ struct HomeView: View {
             CreatePostView(viewModel: CreatePostView.ViewModel(homeViewModel: viewModel))
         })
         .edgesIgnoringSafeArea(.all)
+        .task {
+            await LocationManager.shared.requestLocation()
+        }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+    }
+}
+
+struct MapAnnotationCell: View {
+    
+    let image: UIImage
+    
+    var body: some View {
+        Image(uiImage: image)
+            .resizable()
+            .scaledToFill()
+            .frame(width: 50, height: 50, alignment: .center)
+            .clipShape(Circle())
+            .padding(3)
+            .background(Color.white)
+            .clipShape(Circle())
+            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 0)
     }
 }

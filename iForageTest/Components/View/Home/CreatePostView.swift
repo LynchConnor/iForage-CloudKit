@@ -37,12 +37,21 @@ extension UIImage {
 extension CreatePostView {
     class ViewModel: ObservableObject {
         
+        @Published var centerCoordinate = CLLocationCoordinate2D(latitude: LocationManager.shared.coordinate.latitude, longitude: LocationManager.shared.coordinate.longitude)
+        
+        @Published var containerHeight: CGFloat = 200
+        
+        @Published var showImagePicker: Bool = false
+        @Published var showCamera: Bool = false
+        
+        @Published var showMap: Bool = false
+        
         @ObservedObject var homeViewModel: HomeView.ViewModel
         
-        @Published var isActive: Bool = false
+        @Published var showConfirmationSheet: Bool = false
         
         @Published var title: String = ""
-        @Published var caption: String = ""
+        @Published var caption: String = "Write what you want here..."
         @Published var selectedImage: UIImage?
         @Published var location: CLLocation?
         
@@ -50,17 +59,17 @@ extension CreatePostView {
             _homeViewModel = ObservedObject(wrappedValue: homeViewModel)
         }
         
-        func createPost() async {
+        func uploadPost() async {
             if validatePost(){
                 
                 Task {
-                    await LocationManager.shared.requestLocation()
                     
                     let record = CKRecord(recordType: RecordType.post)
                     record[Post.kTitle] = title
                     record[Post.kCaption] = caption
                     record[Post.kImage] = selectedImage?.convertToCKAsset()
-                    record[Post.kCoordinate] = LocationManager.shared.location
+                    guard let location = await LocationManager.shared.fetchLocation() else { return }
+                    record[Post.kCoordinate] = location
                     
                     do {
                         try await CloudKitManager.shared.saveRecord(record: record)
@@ -86,36 +95,191 @@ struct CreatePostView: View {
     
     @StateObject var viewModel: ViewModel
     
+    @FocusState private var focusField: Field?
+    
+    enum Field {
+        case title
+        case notes
+    }
+    
     init(viewModel: ViewModel){
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
-        VStack {
-            Button {
-                viewModel.isActive = true
-            } label: {
-                Text("Select image")
-            }
+        ScrollView(.vertical, showsIndicators: false) {
             
-            TextField("Title", text: $viewModel.title)
-            TextField("Caption", text: $viewModel.caption)
-            
-            Button {
-                Task {
-                    await viewModel.createPost()
+            ZStack {
+                
+                VStack(spacing: 5) {
                     
-                    dismiss()
-                }
-            } label: {
-                Text("Save")
-            }
+                    HStack {
+                        Button {
+                            dismiss()
+                        } label: {
+                            Text("Cancel")
+                                .font(.system(size: 17, weight: .semibold))
+                        }
+                        .padding(.vertical, 15)
+                        Spacer()
+                        
+                        Button {
+                            Task {
+                                await viewModel.uploadPost()
+                                dismiss()
+                            }
+                        } label: {
+                            Text("Create Post")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.white)
+                                .padding(.vertical, 8)
+                                .padding(.horizontal, 18)
+                                .background(Color.blue)
+                        }
+                        .cornerRadius(5)
+                        .disabled(viewModel.selectedImage == nil || viewModel.title == "" || viewModel.caption == "")
+                        .opacity(viewModel.selectedImage == nil || viewModel.title == "" || viewModel.caption == "" ? 0.6 : 1)
+                    }
+                    .padding(.vertical, 10)
+                    
+                    Button {
+                        viewModel.showConfirmationSheet = true
+                    } label: {
+                        if let image = viewModel.selectedImage {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(height: 200)
+                                .clipped()
+                                .cornerRadius(0)
+                        }else{
+                            
+                            ZStack {
+                                Rectangle()
+                                
+                                ZStack {
+                                    Circle()
+                                        .frame(width: 70, height: 70)
+                                        .foregroundColor(Color.init(red: 44/255, green: 108/255, blue: 100/255))
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .foregroundColor(.white)
+                                        .scaledToFit()
+                                        .frame(width: 30, height: 30)
+                                        .clipped()
+                                }// - ZStack
+                                .frame(height: 200)
+                                .clipShape(Circle())
+                                
+                            }// - ZStack
+                        }
+                        
+                    }// - Button
+                    .confirmationDialog("Choose your preferred media", isPresented: $viewModel.showConfirmationSheet, titleVisibility: .visible) {
+                        Button {
+                            viewModel.showCamera = true
+                            viewModel.showImagePicker = true
+                        } label: {
+                            Text("Camera")
+                        }
+                        
+                        Button {
+                            viewModel.showCamera = false
+                            viewModel.showImagePicker = true
+                        } label: {
+                            Text("Photo Library")
+                        }
 
+                    }
+                    .frame(maxWidth: .infinity)
+                    .cornerRadius(5)
+                    .clipped()
+                    
+                    VStack(spacing: 5) {
+                        
+                        TextField("Name your plant here...", text: $viewModel.title)
+                            .focused($focusField, equals: .title)
+                            .submitLabel(.continue)
+                            .font(.system(size: 22, weight: .semibold))
+                            .padding(.vertical, 15)
+                        
+                        AutoSizeTextField(text: $viewModel.caption, hint: "What do you want to say about your find? Tap to write...", containerHeight: $viewModel.containerHeight){
+                            
+                        }
+                        .frame(height: viewModel.containerHeight <= 200 ? viewModel.containerHeight : 200)
+                            .focused($focusField, equals: .notes)
+                            .submitLabel(.continue)
+                            .lineSpacing(8)
+                            .cornerRadius(5)
+                            .frame(maxWidth: .infinity, minHeight: 100, alignment: .topLeading)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.bottom, 20)
+                        
+                    }// - VStack
+                    .onSubmit {
+                        switch focusField {
+                            case .title:
+                                focusField = .notes
+                            default:
+                                return
+                        }
+                    }
+                    
+                    VStack(spacing: 15) {
+                        
+                        HStack(spacing: 0) {
+                            Text("Use current location?")
+                                .font(.system(size: 18, weight: .semibold))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            Text(viewModel.showMap ? "No" : "Yes")
+                                .font(.system(size: 15, weight: .bold))
+                                .foregroundColor(.gray)
+                                
+                            Toggle(isOn: $viewModel.showMap) {
+                                    Text("")
+                                }
+                                .frame(width: 60)
+                        }
+                        .padding(.trailing, 10)
+                        
+                            
+                        if viewModel.showMap {
+                            
+                            ZStack {
+                                
+                                MapView(centerCoordinate: $viewModel.centerCoordinate)
+                                    .frame(height: 250)
+                                    .cornerRadius(10)
+                                
+                                
+                                Circle()
+                                    .foregroundColor(.blue)
+                                    .frame(width: 35, height: 35, alignment: .center)
+                                    .opacity(0.5)
+                                
+                            }
+                        }
+                        
+                    }
 
-        }
-        .sheet(isPresented: $viewModel.isActive) {
-            ImagePicker(sourceType: .photoLibrary, selectedImage: $viewModel.selectedImage)
-        }
+                    
+                }// - VStack
+                
+            }// - VStack
+            
+            
+        }// - ScrollView
+        .sheet(isPresented: $viewModel.showImagePicker, content: {
+            ImagePicker(sourceType: viewModel.showCamera ? .camera : .photoLibrary, selectedImage: $viewModel.selectedImage)
+                .edgesIgnoringSafeArea(.all)
+        })
+        // - VStack
+        .padding(.horizontal, 20)
+        .padding(.bottom, 20)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .navigationBarHidden(true)
+        .navigationTitle("")
     }
 }
 
