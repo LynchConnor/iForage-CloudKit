@@ -7,18 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E048AB722750550B00E71823 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E048AB712750550B00E71823 /* Constants.swift */; };
+		E048AB772750567B00E71823 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E048AB762750567B00E71823 /* HomeView.swift */; };
+		E048AB79275056C700E71823 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E048AB78275056C700E71823 /* OnboardingView.swift */; };
+		E048AB7B2750574500E71823 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E048AB7A2750574500E71823 /* LocationManager.swift */; };
+		E048AB7D27505BB200E71823 /* CreatePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E048AB7C27505BB200E71823 /* CreatePostView.swift */; };
 		E076BE09275041C500B4BD7C /* iForageTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E076BE08275041C500B4BD7C /* iForageTestApp.swift */; };
-		E076BE0B275041C500B4BD7C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E076BE0A275041C500B4BD7C /* ContentView.swift */; };
+		E076BE0B275041C500B4BD7C /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E076BE0A275041C500B4BD7C /* MainTabView.swift */; };
 		E076BE0D275041C500B4BD7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E076BE0C275041C500B4BD7C /* Assets.xcassets */; };
 		E076BE10275041C500B4BD7C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E076BE0F275041C500B4BD7C /* Preview Assets.xcassets */; };
+		E076BE18275041DA00B4BD7C /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E076BE17275041DA00B4BD7C /* CloudKitManager.swift */; };
+		E076BE1B27504AB500B4BD7C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = E076BE1A27504AB500B4BD7C /* Post.swift */; };
+		E076BE1F2750507A00B4BD7C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E076BE1E2750507A00B4BD7C /* CloudKit.framework */; };
+		E0A00FC72751048100FFD376 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A00FC62751048100FFD376 /* ImagePicker.swift */; };
+		E0A00FC92751230500FFD376 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A00FC82751230500FFD376 /* PostDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E048AB712750550B00E71823 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E048AB762750567B00E71823 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E048AB78275056C700E71823 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		E048AB7A2750574500E71823 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		E048AB7C27505BB200E71823 /* CreatePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostView.swift; sourceTree = "<group>"; };
 		E076BE05275041C500B4BD7C /* iForageTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iForageTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E076BE08275041C500B4BD7C /* iForageTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iForageTestApp.swift; sourceTree = "<group>"; };
-		E076BE0A275041C500B4BD7C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E076BE0A275041C500B4BD7C /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		E076BE0C275041C500B4BD7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E076BE0F275041C500B4BD7C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E076BE17275041DA00B4BD7C /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
+		E076BE1A27504AB500B4BD7C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		E076BE1C2750507800B4BD7C /* iForageTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iForageTest.entitlements; sourceTree = "<group>"; };
+		E076BE1E2750507A00B4BD7C /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		E0A00FC62751048100FFD376 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		E0A00FC82751230500FFD376 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,17 +47,47 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E076BE1F2750507A00B4BD7C /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E048AB732750564F00E71823 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E076BE08275041C500B4BD7C /* iForageTestApp.swift */,
+				E0A00FC62751048100FFD376 /* ImagePicker.swift */,
+				E048AB752750566F00E71823 /* View */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E048AB742750565D00E71823 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				E048AB712750550B00E71823 /* Constants.swift */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
+		E048AB752750566F00E71823 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E076BE0A275041C500B4BD7C /* MainTabView.swift */,
+				E0A00FCB27513A2500FFD376 /* Home */,
+				E0A00FCA2751384600FFD376 /* Onboarding */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E076BDFC275041C500B4BD7C = {
 			isa = PBXGroup;
 			children = (
 				E076BE07275041C500B4BD7C /* iForageTest */,
 				E076BE06275041C500B4BD7C /* Products */,
+				E076BE1D2750507A00B4BD7C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -51,8 +102,11 @@
 		E076BE07275041C500B4BD7C /* iForageTest */ = {
 			isa = PBXGroup;
 			children = (
-				E076BE08275041C500B4BD7C /* iForageTestApp.swift */,
-				E076BE0A275041C500B4BD7C /* ContentView.swift */,
+				E076BE1C2750507800B4BD7C /* iForageTest.entitlements */,
+				E048AB742750565D00E71823 /* Misc */,
+				E048AB732750564F00E71823 /* Components */,
+				E076BE192750441500B4BD7C /* Model */,
+				E076BE16275041CF00B4BD7C /* Manager */,
 				E076BE0C275041C500B4BD7C /* Assets.xcassets */,
 				E076BE0E275041C500B4BD7C /* Preview Content */,
 			);
@@ -65,6 +119,49 @@
 				E076BE0F275041C500B4BD7C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E076BE16275041CF00B4BD7C /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				E076BE17275041DA00B4BD7C /* CloudKitManager.swift */,
+				E048AB7A2750574500E71823 /* LocationManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		E076BE192750441500B4BD7C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E076BE1A27504AB500B4BD7C /* Post.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E076BE1D2750507A00B4BD7C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E076BE1E2750507A00B4BD7C /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E0A00FCA2751384600FFD376 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				E048AB78275056C700E71823 /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		E0A00FCB27513A2500FFD376 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				E048AB762750567B00E71823 /* HomeView.swift */,
+				E0A00FC82751230500FFD376 /* PostDetailView.swift */,
+				E048AB7C27505BB200E71823 /* CreatePostView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +234,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E076BE0B275041C500B4BD7C /* ContentView.swift in Sources */,
+				E0A00FC92751230500FFD376 /* PostDetailView.swift in Sources */,
+				E048AB722750550B00E71823 /* Constants.swift in Sources */,
+				E076BE0B275041C500B4BD7C /* MainTabView.swift in Sources */,
 				E076BE09275041C500B4BD7C /* iForageTestApp.swift in Sources */,
+				E048AB772750567B00E71823 /* HomeView.swift in Sources */,
+				E048AB7B2750574500E71823 /* LocationManager.swift in Sources */,
+				E048AB7D27505BB200E71823 /* CreatePostView.swift in Sources */,
+				E076BE1B27504AB500B4BD7C /* Post.swift in Sources */,
+				E0A00FC72751048100FFD376 /* ImagePicker.swift in Sources */,
+				E076BE18275041DA00B4BD7C /* CloudKitManager.swift in Sources */,
+				E048AB79275056C700E71823 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,7 +302,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -251,7 +357,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -266,17 +372,23 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = iForageTest/iForageTest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iForageTest/Preview Content\"";
 				DEVELOPMENT_TEAM = 2775XVJ3MG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location pls";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Location pls";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location pls";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -286,7 +398,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -295,17 +407,23 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = iForageTest/iForageTest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iForageTest/Preview Content\"";
 				DEVELOPMENT_TEAM = 2775XVJ3MG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location pls";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Location pls";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location pls";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -315,7 +433,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
