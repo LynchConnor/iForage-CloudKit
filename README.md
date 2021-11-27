@@ -16,3 +16,7 @@ into the deep end.
 can be seen below.
 
 ## Screenshots
+
+<img src="https://user-images.githubusercontent.com/91622555/143678759-ff07285d-f823-4945-82f6-2ba3ad517dbb.gif" width="200" />.
+<img src="https://user-images.githubusercontent.com/91622555/143678697-1ca8a77e-af42-44e5-bab9-f0e4e1770fb9.gif" width="200" />.
+<img src="https://user-images.githubusercontent.com/91622555/143678655-931c0a8e-6f7f-4741-8ea2-8e203fae616b.gif" width="200" />
