@@ -46,7 +46,7 @@ extension CreatePostView {
         
         @Published var showMap: Bool = false
         
-        @ObservedObject var homeViewModel: HomeView.ViewModel
+        @ObservedObject var postListVM: PostListViewModel
         
         @Published var showConfirmationSheet: Bool = false
         
@@ -55,8 +55,8 @@ extension CreatePostView {
         @Published var selectedImage: UIImage?
         @Published var location: CLLocation?
         
-        init(homeViewModel: HomeView.ViewModel){
-            _homeViewModel = ObservedObject(wrappedValue: homeViewModel)
+        init(postListVM: PostListViewModel){
+            _postListVM = ObservedObject(wrappedValue: postListVM)
         }
         
         func uploadPost() async {
@@ -74,7 +74,7 @@ extension CreatePostView {
                     do {
                         try await CloudKitManager.shared.saveRecord(record: record)
                         
-                        homeViewModel.posts.append(Post(record: record))
+                        postListVM.posts.append(Post(record: record))
                         
                     }catch {
                         print("DEBUG: \(error.localizedDescription)")
@@ -285,6 +285,6 @@ struct CreatePostView: View {
 
 struct CreatePostView_Previews: PreviewProvider {
     static var previews: some View {
-        CreatePostView(viewModel: CreatePostView.ViewModel(homeViewModel: HomeView.ViewModel()))
+        CreatePostView(viewModel: CreatePostView.ViewModel(postListVM: PostListViewModel()))
     }
 }

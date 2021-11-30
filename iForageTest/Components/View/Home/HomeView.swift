@@ -12,27 +12,12 @@ extension HomeView {
     class ViewModel: ObservableObject {
         @Published var region = LocationManager.shared.region
         @Published var isActive: Bool = false
-        
-        @Published var posts = [Post]()
-        
-        init(){
-            Task {
-                self.posts = await fetchPosts()
-            }
-        }
-        
-        func fetchPosts() async -> [Post] {
-            do {
-                return try await CloudKitManager.shared.fetchPosts()
-            }catch{
-                print("DEBUG: \(error.localizedDescription)")
-                return []
-            }
-        }
     }
 }
 
 struct HomeView: View {
+    
+    @StateObject var postListVM = PostListViewModel()
     
     @StateObject var viewModel: ViewModel
     
@@ -42,16 +27,40 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
-            Map(coordinateRegion: $viewModel.region, showsUserLocation: true, annotationItems: viewModel.posts) { post in
-                MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: post.coordinate.coordinate.latitude, longitude: post.coordinate.coordinate.longitude)) {
+            ZStack(alignment: .topLeading) {
+                Map(coordinateRegion: $viewModel.region, showsUserLocation: true, annotationItems: postListVM.posts) { post in
+                    MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: post.coordinate.coordinate.latitude, longitude: post.coordinate.coordinate.longitude)) {
+                        
+                        NavigationLink {
+                            LazyView(PostDetailView(viewModel: PostDetailView.ViewModel(post: post, posts: $postListVM.posts)))
+                        } label: {
+                            MapAnnotationCell(image: post.image.toUIImage())
+                        }
+                        .isDetailLink(false)
+                    }
+                }.edgesIgnoringSafeArea(.all)
+                
+                
+                HStack(spacing: 25) {
                     
                     NavigationLink {
-                        LazyView(PostDetailView(viewModel: PostDetailView.ViewModel(post: post, posts: $viewModel.posts)))
+                        ExploreView()
+                            .environmentObject(postListVM)
                     } label: {
-                        MapAnnotationCell(image: post.image.toUIImage())
+                        Image(systemName: "magnifyingglass")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25, height: 25)
                     }
                     .isDetailLink(false)
+                    
+                    Spacer()
+                    
                 }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 15)
+                .padding(.horizontal, 20)
+                .background(Color.white)
             }
         }
         .navigationTitle("")
@@ -74,9 +83,8 @@ struct HomeView: View {
             ,alignment: .bottomTrailing
         )
         .sheet(isPresented: $viewModel.isActive, content: {
-            CreatePostView(viewModel: CreatePostView.ViewModel(homeViewModel: viewModel))
+            CreatePostView(viewModel: CreatePostView.ViewModel(postListVM: postListVM))
         })
-        .edgesIgnoringSafeArea(.all)
         .task {
             await LocationManager.shared.requestLocation()
         }

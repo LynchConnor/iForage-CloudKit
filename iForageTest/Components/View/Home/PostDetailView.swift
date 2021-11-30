@@ -201,6 +201,7 @@ struct PostDetailView: View {
                             if !viewModel.isEditing {
                                 
                                 Text(viewModel.post.caption)
+                                    .fixedSize(horizontal: false, vertical: true)
                                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                                     .font(.system(size: 17, weight: .light))
                                     .lineSpacing(8)
