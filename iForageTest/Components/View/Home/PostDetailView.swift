@@ -10,9 +10,11 @@ import SwiftUI
 
 extension PostDetailView {
     @MainActor class ViewModel: ObservableObject {
-        @Published var post: Post
+        
+        @ObservedObject var viewModel: PostListViewModel
+        
+        var post: Post
         @Published var isEditing: Bool = false
-        @Binding var posts: [Post]
         
         @Published var postCoordinate: CLLocation?
         
@@ -20,8 +22,8 @@ extension PostDetailView {
         
         @Published var confirmationShown: Bool = false
         
-        init(post: Post, posts: Binding<[Post]>){
-            _posts = posts
+        init(post: Post, viewModel: PostListViewModel){
+            _viewModel = ObservedObject(wrappedValue: viewModel)
             self.postCoordinate = post.coordinate
             self.post = post
             self.centerCoordinate = CLLocationCoordinate2D(latitude: post.coordinate.coordinate.latitude, longitude: post.coordinate.coordinate.longitude)
@@ -55,10 +57,12 @@ extension PostDetailView {
         
         func deletePost(){
             Task {
-                try await CloudKitUtility.deleteRecord(recordID: post.id)
-                guard let index = posts.firstIndex(where: { $0.id == post.id }) else { return }
-                print("Index: \(index)")
-                posts.remove(at: index)
+                do {
+                    try await CloudKitUtility.deleteRecord(recordID: post.id)
+                    viewModel.posts.removeAll(where: { $0.id == post.id })
+                }catch {
+                    print("DEBUG: \(error.localizedDescription)")
+                }
             }
         }
         
@@ -379,6 +383,6 @@ struct PostDetailView: View {
 
 struct PostDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        PostDetailView(viewModel: PostDetailView.ViewModel(post: Post(record: CKRecord(recordType: RecordType.post)), posts: .constant([])))
+        PostDetailView(viewModel: PostDetailView.ViewModel(post: Post(record: CKRecord(recordType: RecordType.post)), viewModel: PostListViewModel()))
     }
 }

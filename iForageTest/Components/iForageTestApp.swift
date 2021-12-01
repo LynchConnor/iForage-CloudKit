@@ -21,8 +21,6 @@ struct iForageTestApp: App {
                     .environmentObject(LManager)
                     .task {
                         await CKManager.fetchCurrentUser()
-                        await LManager.requestAuthorization()
-                        await LManager.requestLocation()
                     }
                     .navigationViewStyle(StackNavigationViewStyle())
             }

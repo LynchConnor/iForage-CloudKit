@@ -32,7 +32,7 @@ struct HomeView: View {
                     MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: post.coordinate.coordinate.latitude, longitude: post.coordinate.coordinate.longitude)) {
                         
                         NavigationLink {
-                            LazyView(PostDetailView(viewModel: PostDetailView.ViewModel(post: post, posts: $postListVM.posts)))
+                            LazyView(PostDetailView(viewModel: PostDetailView.ViewModel(post: post, viewModel: postListVM)))
                         } label: {
                             MapAnnotationCell(image: post.image.toUIImage())
                         }

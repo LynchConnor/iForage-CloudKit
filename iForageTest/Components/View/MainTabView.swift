@@ -10,15 +10,20 @@ import SwiftUI
 
 struct MainTabView: View {
     
-    @EnvironmentObject var manager: CloudKitManager
+    @EnvironmentObject var LManager: LocationManager
+    @EnvironmentObject var CKManager: CloudKitManager
     
     @State var isActive: Bool = false
     
     var body: some View {
         VStack {
-            switch manager.state {
+            switch CKManager.state {
             case .signedIn:
                 HomeView()
+                    .task {
+                        await LManager.requestAuthorization()
+                        await LManager.requestLocation()
+                    }
             case .loading:
                 ProgressView()
             case .signedOut:

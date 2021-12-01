@@ -110,7 +110,7 @@ struct ExploreView: View {
                         ForEach(postListVM.filteredPosts){ post in
                             
                             NavigationLink {
-                                LazyView(PostDetailView(viewModel: PostDetailView.ViewModel(post: post, posts: $postListVM.posts)))
+                                LazyView(PostDetailView(viewModel: PostDetailView.ViewModel(post: post, viewModel: postListVM)))
                             } label: {
                                 HStack {
                                     Image(uiImage: post.image.toUIImage())
